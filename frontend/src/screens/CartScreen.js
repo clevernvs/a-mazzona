@@ -6,7 +6,6 @@ import {
   Button,
   Card,
   CardContent,
-  Container,
   Divider,
   FormControl,
   Grid, Link,
@@ -57,7 +56,6 @@ export default function CartScreen(props) {
         )
         : (
           <Grid container>
-
             <Grid item direction="column" spacing={2}>
               {cartItems.map((item) => (
 
@@ -116,7 +114,6 @@ export default function CartScreen(props) {
               ))
               }
 
-
               < Grid item lg={4} >
                 <Card variant="outlined">
                   <CardContent>
@@ -139,9 +136,11 @@ export default function CartScreen(props) {
               </Grid>
 
             </Grid>
+          </Grid>
         )
       }
 
     </div>
-        );
+
+  )
 }
