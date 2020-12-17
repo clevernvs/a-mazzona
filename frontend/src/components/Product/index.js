@@ -1,5 +1,5 @@
 import React from 'react';
-import Rating from '../Rating';
+// import Rating from '../Rating';
 import {
   Card,
   CardActionArea,
@@ -20,7 +20,7 @@ export default function Product(props) {
           <CardMedia image={`product/${product._id}`} title={product.name} />
         </Link>
         <CardContent>
-          <Rating rating={product.rating} numReviews={product.numReviews} />
+          {/* <Rating rating={product.rating} numReviews={product.numReviews} /> */}
           <Link to={`product/${product._id}`}>
             <Typography variant="h5" gutterBottom>{product.name}</Typography>
           </Link>
