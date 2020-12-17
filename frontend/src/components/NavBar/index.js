@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { AppBar, Badge, Button, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Badge, Link, Toolbar, Typography } from '@material-ui/core';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
 export default function NavBar() {
@@ -13,10 +13,14 @@ export default function NavBar() {
     <div>
       <AppBar position="static">
         <Toolbar>
-          <Link to={'/'}>
-            <Typography variant="h6">AMAZONA</Typography>
-          </Link>
-          <Link to={'/cart'}>
+
+          <Typography variant="h5">
+            <Link component={RouterLink} to={'/'} color="inherit">
+              AMAZONA
+            </Link>
+          </Typography>
+
+          <Link component={RouterLink} to={'/cart'} color="inherit">
             {
               cartItems.length > 0 ? (
                 <Badge badgeContent={cartItems.length} color="secondary">
@@ -29,9 +33,12 @@ export default function NavBar() {
                 )
             }
           </Link>
-          <Link to={'/signin'}>
-            <Button color="inherit">Sign In</Button>
-          </Link>
+
+          <Typography variant="h6">
+            <Link component={RouterLink} to={'/signin'} color="inherit">
+              Sign In
+            </Link>
+          </Typography>
         </Toolbar>
       </AppBar>
     </div >
