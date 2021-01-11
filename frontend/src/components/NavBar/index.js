@@ -8,6 +8,8 @@ export default function NavBar() {
 
   const cart = useSelector(state => state.cart);
   const { cartItems } = cart;
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
 
   return (
     <div>
@@ -35,9 +37,17 @@ export default function NavBar() {
           </Link>
 
           <Typography variant="h6">
-            <Link component={RouterLink} to={'/signin'} color="inherit">
-              Sign In
-            </Link>
+            {
+              userInfo ? (
+                <Link component={RouterLink} to={'#'} color="inherit">
+                  {userInfo.name}
+                </Link>
+              ) : (
+                  <Link component={RouterLink} to={'/signin'} color="inherit">
+                    Sign In
+                  </Link>
+                )
+            }
           </Typography>
         </Toolbar>
       </AppBar>

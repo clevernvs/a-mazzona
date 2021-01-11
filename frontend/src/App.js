@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import CartScreen from './screens/CartScreen';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import SignInScreen from './screens/SignInScreen';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
       <NavBar />
       <Route path="/cart/:id?" component={CartScreen}></Route>
       <Route path="/product/:id" component={ProductScreen}></Route>
+      <Route path="/signin" component={SignInScreen}></Route>
       <Route path="/" component={HomeScreen} exact></Route>
     </BrowserRouter >
   );
