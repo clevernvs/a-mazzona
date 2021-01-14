@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { signin } from '../actions/userActions';
+import { register } from '../actions/userActions';
 
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
@@ -38,21 +38,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
+export default function RegisterScreen(props) {
 
   const classes = useStyles();
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
   const redirect = props.location.search ? props.location.search.split('=')[1] : '/';
 
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo, loading, error } = userSignin;
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, loading, error } = userRegister;
 
   const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(signin(email, password));
+    if (password !== confirmPassword) {
+      alert('Senha ou confirmação de senha não são iguais.');
+    } else {
+      dispatch(register(name, email, password));
+    }
   };
 
   useEffect(() => {
@@ -69,53 +76,73 @@ export default function SignIn(props) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Criar conta
         </Typography>
         {loading && <LoadingBox></LoadingBox>}
         {error && <MessageBox>{error}</MessageBox>}
         <form className={classes.form} noValidate onSubmit={submitHandler}>
           <TextField
+            id="name"
+            label="Nome"
+            name="name"
             variant="outlined"
             margin="normal"
-            required
             fullWidth
+            autoComplete="name"
+            autoFocus
+            required
+            onChange={e => setName(e.target.value)}
+          />
+          <TextField
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
+            variant="outlined"
+            margin="normal"
+            fullWidth
             autoComplete="email"
             autoFocus
+            required
             onChange={e => setEmail(e.target.value)}
           />
           <TextField
+            id="password"
+            name="password"
+            label="Senha"
+            type="password"
             variant="outlined"
             margin="normal"
-            required
             fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
             autoComplete="current-password"
+            required
             onChange={e => setPassword(e.target.value)}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <TextField
+            id="confirmPassword"
+            name="confirmPassword"
+            label="Confirme a senha"
+            type="password"
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            autoComplete="current-password"
+            required
+            onChange={e => setConfirmPassword(e.target.value)}
           />
           <Button
             type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
             className={classes.submit}
+            color="primary"
+            variant="contained"
+            fullWidth
           >
-            Sign In
+            Registrar
           </Button>
           <Grid container>
             <Grid item xs>
-              Ainda não é cadastrado?
-              <Link to={`/register?redirect=${redirect}`} variant="body2">
-                Crie a sua conta.
+              Já é cadastrado?
+              <Link to={`/signin?redirect=${redirect}`} variant="body2">
+                Faça o login
               </Link>
             </Grid>
           </Grid>
