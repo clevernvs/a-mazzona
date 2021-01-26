@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { register } from '../actions/userActions';
-
 import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 
