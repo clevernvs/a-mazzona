@@ -6,7 +6,15 @@ const data = {
       name: 'Adminum',
       email: 'admin@example.com',
       password: bcrypt.hashSync('123456', 8),
-      isAdmin: true
+      isAdmin: true,
+      isSeller: true,
+      seller: {
+        name: 'Puma',
+        logo: '/images/logo1.png',
+        description: 'best seller',
+        rating: 4.5,
+        numReviews: 120,
+      },
     },
     {
       name: 'Userum',
@@ -73,4 +81,4 @@ const data = {
   ]
 }
 
-export default { data };
+export default data;
